@@ -53,7 +53,13 @@ class Controller {
 			res.status(200).json({ access_token: token });
 		} catch (error) {
 			console.log(error);
-			res.status(400).json({ message: error });
+			let code = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			if (error.message == "INVALID EMAIL/PASSWORD")
+				res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
+
+			res.status(code).json(message);
 		}
 	}
 
@@ -86,6 +92,27 @@ class Controller {
 			});
 		} catch (error) {
 			console.log(error);
+			res.status(400).json({ message: "INVALID UPDATE USER PROFILE" });
+		}
+	}
+
+	static async deleteUser(req, res, next) {
+		try {
+			// res.send("Masuk");
+			// console.log(req.params);
+
+			const { id } = req.params;
+			// console.log(id, "<<< ID DARI REQ PARAMSS");
+
+			const findUser = await User.findByPk(id);
+
+			if (!findUser) throw new Error("USER NOT FOUND");
+			await User.destroy({ where: { id: findUser.id } });
+
+			res.status(200).json({ message: "DELETE SUCCESSFULL" });
+		} catch (error) {
+			console.log(error);
+			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
 		}
 	}
 

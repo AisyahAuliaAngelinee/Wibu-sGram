@@ -8,6 +8,7 @@ router.post("/login", Controller.loginPage);
 router.use(authentication);
 
 router.put("/update/:id", Controller.updateUser);
+router.delete("/delete/:id", Controller.deleteUser);
 router.get("/", Controller.showPost);
 
 module.exports = router;
