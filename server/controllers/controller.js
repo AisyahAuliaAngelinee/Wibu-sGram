@@ -28,6 +28,14 @@ class Controller {
 			});
 		}
 	}
+
+	static async loginPage(req, res, next) {
+		try {
+			res.send(req.body);
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = Controller;
