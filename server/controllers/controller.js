@@ -56,6 +56,23 @@ class Controller {
 			res.status(400).json({ message: error });
 		}
 	}
+
+	static async updateUser(req, res, next) {
+		try {
+			res.send("Masuk");
+			console.log(req.body);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async showPost(req, res, next) {
+		try {
+			res.send("Masuk");
+		} catch (error) {
+			console.log(error);
+		}
+	}
 }
 
 module.exports = Controller;
