@@ -59,8 +59,31 @@ class Controller {
 
 	static async updateUser(req, res, next) {
 		try {
-			res.send("Masuk");
-			console.log(req.body);
+			// res.send("Masuk");
+			// console.log(req.body);
+
+			const { id } = req.params;
+			const idUser = await User.findByPk(id);
+
+			if (!idUser) throw new Error("ERROR NOT FOUND");
+
+			const updateUser = await User.update(
+				{
+					userName: req.body.userName,
+					email: req.body.email,
+				},
+				{
+					where: {
+						id,
+					},
+				}
+			);
+
+			if (!updateUser) throw new Error("INVALID UPDATE PROFILE");
+
+			res.status(200).json({
+				message: "PROFILE UPDATE SUCCESSFULL",
+			});
 		} catch (error) {
 			console.log(error);
 		}
