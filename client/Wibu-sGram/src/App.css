@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
 
 :root {
-	--blue: #1c6dd0;
+	--primary-blue: #004fd9;
+	--secondary-blue: #5182f0;
+	--accent-color: #d94e28;
 	--black: #272829;
 	--white: #fff;
-	--light-color: #c2d1dd;
-	--white-light-color: #dce4ea;
-	--white-light-color2: #e3e3e3;
+	--foreground: #efefef;
+	--background: var(--accent-color);
 	--box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 
@@ -22,12 +23,9 @@
 	transition: all 0.2s linear;
 }
 
-a {
-	text-decoration: none;
-}
-
-ul {
-	list-style: none;
+*::selection {
+	background: var(--accent-color);
+	color: var(--foreground);
 }
 
 html {
@@ -37,9 +35,65 @@ html {
 	scroll-padding-top: 5.5rem;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 section {
 	padding: 1rem 9%;
-	/* background: var(--white-light-color); */
+}
+
+html::-webkit-scrollbar {
+	width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+	background: var(--accent-color);
+}
+
+html::-webkit-scrollbar-thumb {
+	background: var(--secondary-blue);
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	background: var(--foreground);
+	padding: 1.5rem 10%;
+	box-shadow: 0 0.3rem 2rem rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .logo img {
+	height: 1.5rem;
+}
+
+header .navbar ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	list-style: none;
+}
+
+header .navbar ul li {
+	margin-left: 3rem;
+}
+
+header .navbar ul li a {
+	font-size: 1.4rem;
+	color: var(--accent-color);
+}
+
+header #menu-bars {
+	font-size: 1.4rem;
+	color: var(--accent-color);
+	cursor: pointer;
+	display: none;
 }
 
 /* LOGIN FORM START */
@@ -67,14 +121,14 @@ section {
 	font-size: 2.5rem;
 	text-align: center;
 	font-weight: bold;
-	color: var(--white);
+	color: var(--secondary-blue);
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
 }
 
 .login-page .wrapper .input-box {
 	width: 100%;
 	height: 50px;
-	background: var(--white-light-color2);
+	background: var(--foreground);
 	border-radius: 0.5rem;
 	margin: 30px 0;
 }
@@ -97,7 +151,7 @@ section {
 .login-page .wrapper .btn-login {
 	width: 100%;
 	height: 2.3rem;
-	background: var(--blue);
+	background: var(--primary-blue);
 	border: none;
 	outline: none;
 	border-radius: 1.3rem;
@@ -121,7 +175,7 @@ section {
 }
 
 .login-page .wrapper .register-link p a {
-	color: var(--blue);
+	color: var(--secondary-blue);
 	text-decoration: none;
 	font-weight: 600;
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
@@ -157,14 +211,14 @@ section {
 	font-size: 2.5rem;
 	text-align: center;
 	font-weight: bold;
-	color: var(--white);
+	color: var(--accent-color);
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
 }
 
 .regis-page .wrapper .input-box {
 	width: 100%;
 	height: 50px;
-	background: var(--white-light-color2);
+	background: var(--foreground);
 	border-radius: 0.5rem;
 	margin: 30px 0;
 }
@@ -187,7 +241,7 @@ section {
 .regis-page .wrapper .btn-regis {
 	width: 100%;
 	height: 2.3rem;
-	background: var(--blue);
+	background: var(--accent-color);
 	border: none;
 	outline: none;
 	border-radius: 1.3rem;
@@ -211,7 +265,7 @@ section {
 }
 
 .regis-page .wrapper .login-link p a {
-	color: var(--blue);
+	color: var(--accent-color);
 	text-decoration: none;
 	font-weight: 600;
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
@@ -221,3 +275,51 @@ section {
 	text-decoration: underline;
 }
 /* REGISTER FORM END */
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+	html {
+		font-size: 99%;
+		scroll-behavior: smooth;
+		scroll-padding-top: 5.5rem;
+	}
+
+	header #menu-bars {
+		display: block;
+	}
+
+	header .navbar {
+		position: fixed;
+		top: 8rem;
+		left: 0;
+		width: 100%;
+		background: var(--secondary-blue);
+		border-top: 0.2rem solid rgba(0, 0, 0, 0.1);
+		transform: scaleY(0);
+		transform-origin: top;
+		opacity: 0;
+	}
+
+	header .navbar ul {
+		flex-flow: column;
+		padding: 1%;
+	}
+
+	header .navbar ul li {
+		margin: 0.4rem;
+		width: 100%;
+	}
+
+	header .navbar ul li a {
+		display: block;
+		color: var(--foreground);
+		padding-left: 2rem;
+		border-left: 0.2rem solid var(--accent-color);
+		font-size: 1rem;
+	}
+
+	header .navbar ul li a:hover {
+		color: var(--accent-color);
+		border-color: var(--accent-color);
+	}
+}
