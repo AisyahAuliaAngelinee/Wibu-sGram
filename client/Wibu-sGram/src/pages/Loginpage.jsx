@@ -1,24 +1,30 @@
 import "../App.css";
 import { Link } from "react-router-dom";
+import GoogleLoginButton from "../components/LoginGoogle";
 
 const Login = () => {
 	return (
 		<>
-			<div className="container">
-				<div className="content">
-					<div className="text-sci">
-						<h2>
-							Welcome! <br></br>
-							<span>To My Website</span>
-						</h2>
-						<p>
-							Disclaimer, This website full of Weebs Content. Please hold on for
-							a moment, if you can't stand it then you can wave your hand
-						</p>
-					</div>
-					<div className="logreg-box"></div>
+			<section className="login-page">
+				<div className="wrapper">
+					<form action="">
+						<h1>Login</h1>
+						<div className="input-box">
+							<input type="text" name="email" placeholder="email" />
+						</div>
+						<div className="input-box">
+							<input type="password" name="password" placeholder="Password" />
+						</div>
+						<button className="btn-login">Login</button>
+						<div className="register-link">
+							<p>
+								Don't have an account? <Link to="/register">Register</Link>
+							</p>
+						</div>
+					</form>
+					<GoogleLoginButton />
 				</div>
-			</div>
+			</section>
 		</>
 	);
 };

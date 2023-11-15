@@ -1,10 +1,12 @@
 const { verifyPassword } = require("../helpers/bcrypt");
 const { User } = require("../models");
 const { signToken } = require("../helpers/jwt");
+const { OAuth2Client } = require("google-auth-library");
 
 class Controller {
 	static async registerPage(req, res, next) {
 		try {
+			// console.log("MAsuk");
 			// res.send(req.body);
 			const createUser = {
 				userName: req.body.userName,
@@ -35,6 +37,7 @@ class Controller {
 		try {
 			// res.send(req.body);
 			const { email, password } = req.body;
+			// console.log(email, password);
 			const findUser = await User.findOne({
 				where: {
 					email,
@@ -113,6 +116,44 @@ class Controller {
 		} catch (error) {
 			console.log(error);
 			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
+		}
+	}
+
+	static async googleLogin(req, res, next) {
+		try {
+			// console.log(req.headers);
+			// console.log("lllllll");
+			const { token } = req.headers;
+			const client = new OAuth2Client();
+
+			const ticket = await client.verifyIdToken({
+				idToken: token,
+				audience: process.env.GOOGLE_CLIENT_ID,
+			});
+			// console.log(ticket, "<<< Login google");
+
+			const payload = ticket.getPayload();
+			// console.log(payload, "<<< ini payload");
+
+			const [user, created] = await User.findOrCreate({
+				where: {
+					email: payload.email,
+				},
+				defaults: {
+					userName: "angelinee",
+					email: payload.email,
+					password: "password_google",
+				},
+				hooks: false,
+			});
+			// console.log(user, "<<< ini user");
+
+			const access_token = signToken({ id: user.id });
+			// console.log(access_token, "<<<< Acces Token");
+
+			res.status(200).json(access_token);
+		} catch (error) {
+			console.log(error);
 		}
 	}
 
