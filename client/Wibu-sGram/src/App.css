@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+:root {
+	--blue: #1c6dd0;
+	--black: #272829;
+	--white: #fff;
+	--light-color: #c2d1dd;
+	--white-light-color: #dce4ea;
+	--white-light-color2: #e3e3e3;
+	--box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+* {
+	font-family: "Exo 2", sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	text-transform: capitalize;
+	transition: all 0.2s linear;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+}
+
+html {
+	font-size: 110%;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	scroll-padding-top: 5.5rem;
+}
+
+section {
+	padding: 1rem 9%;
+	/* background: var(--white-light-color); */
+}
+
+/* LOGIN FORM START */
+.login-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100dvh;
+	background: url(https://img3.wallspic.com/previews/5/1/2/1/7/171215/171215-saber-sakura_matou-fate_zero-rin_tohsaka-anime-x750.jpg)
+		no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.login-page .wrapper {
+	width: 420px;
+	background: transparent;
+	border-radius: 0.8rem;
+	padding: 1rem 2rem;
+	backdrop-filter: blur(0.7rem);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-page .wrapper h1 {
+	font-size: 2.5rem;
+	text-align: center;
+	font-weight: bold;
+	color: var(--white);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.login-page .wrapper .input-box {
+	width: 100%;
+	height: 50px;
+	background: var(--white-light-color2);
+	border-radius: 0.5rem;
+	margin: 30px 0;
+}
+
+.login-page .wrapper .input-box input {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 0.2rem solid rgb(255, 255, 255, 0.2);
+	border-radius: 0.3rem;
+	padding: 20px 45px 20px 20px;
+}
+
+.login-page .wrapper .input-box input::placeholder {
+	color: var(--black);
+}
+
+.login-page .wrapper .btn-login {
+	width: 100%;
+	height: 2.3rem;
+	background: var(--blue);
+	border: none;
+	outline: none;
+	border-radius: 1.3rem;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	font-size: 1rem;
+	color: var(--white);
+	font-weight: 600;
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.login-page .wrapper .register-link {
+	font-size: 1rem;
+	text-align: center;
+	margin: 2rem 0 1rem;
+}
+
+.login-page .wrapper .register-link p {
+	color: var(--white);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.login-page .wrapper .register-link p a {
+	color: var(--blue);
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.login-page .wrapper .register-link p a:hover {
+	text-decoration: underline;
+}
+/* LOGIN FORM END */
+
+/* REGISTER FORM START */
+.regis-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100dvh;
+	background: url(https://c4.wallpaperflare.com/wallpaper/230/138/487/anime-girls-maid-outfit-maid-wallpaper-preview.jpg)
+		no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.regis-page .wrapper {
+	width: 420px;
+	background: transparent;
+	border-radius: 0.8rem;
+	padding: 1rem 2rem;
+	backdrop-filter: blur(0.7rem);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.regis-page .wrapper h1 {
+	font-size: 2.5rem;
+	text-align: center;
+	font-weight: bold;
+	color: var(--white);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.regis-page .wrapper .input-box {
+	width: 100%;
+	height: 50px;
+	background: var(--white-light-color2);
+	border-radius: 0.5rem;
+	margin: 30px 0;
+}
+
+.regis-page .wrapper .input-box input {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 0.2rem solid rgb(255, 255, 255, 0.2);
+	border-radius: 0.3rem;
+	padding: 20px 45px 20px 20px;
+}
+
+.regis-page .wrapper .input-box input::placeholder {
+	color: var(--black);
+}
+
+.regis-page .wrapper .btn-regis {
+	width: 100%;
+	height: 2.3rem;
+	background: var(--blue);
+	border: none;
+	outline: none;
+	border-radius: 1.3rem;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	font-size: 1rem;
+	color: var(--white);
+	font-weight: 600;
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.regis-page .wrapper .login-link {
+	font-size: 1rem;
+	text-align: center;
+	margin: 2rem 0 1rem;
+}
+
+.regis-page .wrapper .login-link p {
+	color: var(--white);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.regis-page .wrapper .login-link p a {
+	color: var(--blue);
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.regis-page .wrapper .login-link p a:hover {
+	text-decoration: underline;
+}
+/* REGISTER FORM END */
