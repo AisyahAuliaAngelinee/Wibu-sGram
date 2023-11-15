@@ -28,6 +28,8 @@ const Login = () => {
 			// console.log(response.data, "<<<< response");
 
 			localStorage.setItem("token", response.data.access_token);
+
+			navigate("/home");
 		} catch (error) {
 			console.log(error.message);
 		}

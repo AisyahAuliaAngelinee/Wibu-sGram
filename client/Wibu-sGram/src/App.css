@@ -40,7 +40,26 @@ body {
 }
 
 section {
-	padding: 1rem 9%;
+	min-height: 100dvh;
+	padding: 1rem 10%;
+	padding-top: 1rem;
+}
+
+.btn {
+	font-size: 1rem;
+	padding: 0.4rem 1.6rem;
+	border-radius: 5rem;
+	margin-top: 1rem;
+	background: none;
+	color: var(--accent-color);
+	cursor: pointer;
+	border: 0.2rem solid var(--accent-color);
+}
+
+.btn:hover {
+	background: var(--primary-blue);
+	border: 0.2rem solid var(--foreground);
+	color: var(--white);
 }
 
 html::-webkit-scrollbar {
@@ -55,6 +74,7 @@ html::-webkit-scrollbar-thumb {
 	background: var(--secondary-blue);
 }
 
+/* NAVBAR START */
 header {
 	position: fixed;
 	top: 0;
@@ -86,6 +106,11 @@ header .navbar ul li {
 
 header .navbar ul li a {
 	font-size: 1.4rem;
+	font-weight: bold;
+	color: var(--primary-blue);
+}
+
+header .navbar ul li a:hover {
 	color: var(--accent-color);
 }
 
@@ -95,6 +120,71 @@ header #menu-bars {
 	cursor: pointer;
 	display: none;
 }
+/* NAVBAR END */
+
+/* HOME START */
+.home {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.home::before,
+.home::after {
+	content: "";
+	position: absolute;
+	top: 5rem;
+	right: -6rem;
+	background: var(--secondary-blue);
+	border-radius: 5rem;
+	transform: rotate(-45deg);
+	height: 40rem;
+	width: 70rem;
+	z-index: -2;
+	animation: animate 0.5s linear 1;
+}
+
+@keyframes animate {
+	0% {
+		transform: rotate(-45deg) translateY(-40rem);
+	}
+}
+
+.home::before {
+	top: -7rem;
+	background: var(--foreground);
+	box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.1);
+	z-index: -1;
+}
+
+.home .image {
+	flex: 1 1 39rem;
+}
+
+.home .image img {
+	width: 100%;
+}
+
+.home .content {
+	flex: 1 1 39rem;
+}
+
+.home .content h3 {
+	color: var(--primary-blue);
+	font-size: 3.6rem;
+}
+
+.home .content p {
+	color: var(--black);
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 1rem 0;
+}
+/* HOME END */
 
 /* LOGIN FORM START */
 .login-page {

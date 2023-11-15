@@ -15,7 +15,7 @@ const Navbar = () => {
 				<nav className="navbar">
 					<ul>
 						<li>
-							<Link to={"#"}>Home</Link>
+							<Link to={"/home"}>Home</Link>
 						</li>
 						<li>
 							<Link to={"#"}>About</Link>
@@ -24,7 +24,7 @@ const Navbar = () => {
 							<Link to={"#"}>Waifu</Link>
 						</li>
 						<li>
-							<Link to={"#"}>Post</Link>
+							<Link to={"#"}>Profile</Link>
 						</li>
 					</ul>
 				</nav>
