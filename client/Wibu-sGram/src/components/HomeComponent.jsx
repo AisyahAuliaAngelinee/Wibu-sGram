@@ -10,7 +10,7 @@ const Homecomponent = () => {
 						eiusmod tempor incididunt ut labore et dolore magna aliqua. Justo
 						donec enim diam vulputate ut.
 					</p>
-					<Link to={"#"}>
+					<Link to={"/post"}>
 						<button className="btn">Let's Start</button>
 					</Link>
 				</div>

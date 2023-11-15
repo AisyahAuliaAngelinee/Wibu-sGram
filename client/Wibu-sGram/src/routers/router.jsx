@@ -3,6 +3,8 @@ import Parent from "../pages/Parent";
 import Login from "../pages/Loginpage";
 import Register from "../pages/Registerpage";
 import Homepage from "../pages/Hompage";
+import Postpage from "../pages/Postpage";
+import Profilecomponent from "../components/Profilecomponent";
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
 			{
 				path: "/home",
 				element: <Homepage />,
+			},
+			{
+				path: "/profile",
+				element: <Profilecomponent />,
+			},
+			{
+				path: "/post",
+				element: <Postpage />,
 			},
 		],
 	},
