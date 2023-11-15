@@ -25,9 +25,9 @@ const Login = () => {
 				email,
 				password,
 			});
-			console.log(response, "<<<< response");
+			// console.log(response.data, "<<<< response");
 
-			// localStorage.setItem("token", response.data)
+			localStorage.setItem("token", response.data.access_token);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -39,12 +39,26 @@ const Login = () => {
 					<form action="">
 						<h1>Login</h1>
 						<div className="input-box">
-							<input type="text" name="email" placeholder="email" />
+							<input
+								type="text"
+								name="email"
+								placeholder="email"
+								onChange={isEmail}
+								value={email}
+							/>
 						</div>
 						<div className="input-box">
-							<input type="password" name="password" placeholder="Password" />
+							<input
+								type="password"
+								name="password"
+								placeholder="password"
+								onChange={isPassword}
+								value={password}
+							/>
 						</div>
-						<button className="btn-login">Login</button>
+						<button className="btn-login" onClick={submitLogin}>
+							Login
+						</button>
 						<div className="register-link">
 							<p>
 								Don't have an account? <Link to="/register">Register</Link>
