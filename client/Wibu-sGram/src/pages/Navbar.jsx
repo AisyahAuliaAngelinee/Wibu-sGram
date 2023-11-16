@@ -1,27 +1,7 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-	const token = localStorage.getItem("token");
 	const id = localStorage.getItem("id");
-
-	async function fetchUser() {
-		try {
-			const { data } = await axios.get(`http://localhost:3000/update/${id}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
-			console.log(data, "<< Datas");
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	useEffect(() => {
-		fetchUser();
-	}, []);
 
 	return (
 		<>

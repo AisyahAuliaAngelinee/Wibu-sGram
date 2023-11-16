@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+// import { useEffect } from "react-router-dom";
+
 const Homecomponent = () => {
 	return (
 		<>

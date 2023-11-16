@@ -1,14 +1,15 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 
 const Profilecomponent = () => {
-	const username = localStorage.getItem("userName");
-	const userEmail = localStorage.getItem("email");
+	// const username = localStorage.getItem("userName");
+	// const userEmail = localStorage.getItem("email");
 
-	const [userName, setUsername] = useState(username);
-	const [email, setEmail] = useState(userEmail);
+	const [userName, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [error, setError] = useState(null);
 
 	const isUsername = (event) => {
 		setUsername(event.target.value);
@@ -21,14 +22,39 @@ const Profilecomponent = () => {
 	const token = localStorage.getItem("token");
 	const { id } = useParams();
 
+	const navigate = useNavigate();
+	// pake useeffect buat ngambil data user
+	// set username sama email
+	useEffect(() => {
+		async function fetchUser() {
+			try {
+				const { data } = await axios.get(`http://localhost:3000/update/${id}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
+				// console.log(data, "<< Datas");
+
+				setUsername(data.userName);
+				setEmail(data.email);
+			} catch (error) {
+				console.log(error);
+				setError(error);
+			}
+		}
+
+		fetchUser();
+	}, []);
+
 	async function submitUpdate() {
+		// console.log("submit");
 		try {
-			setLoading(true);
+			// setLoading(true);
 			const { data } = await axios.put(
 				`http://localhost:3000/update/${id}`,
 				{
-					userName: username,
-					email: userEmail,
+					userName,
+					email,
 				},
 				{
 					headers: {
@@ -40,8 +66,24 @@ const Profilecomponent = () => {
 
 			setEmail(data.email);
 			setUsername(data.userName);
+
+			navigate("/home");
 		} catch (error) {
-			console.log(error.message);
+			console.log(error);
+			setError(error);
+		}
+	}
+
+	async function submitDelete() {
+		try {
+			await axios.delete(`http://localhost:3000/delete/${id}`, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+
+			navigate("/");
+		} catch (error) {
+			console.log(error);
+			setError(error);
 		}
 	}
 
@@ -51,13 +93,14 @@ const Profilecomponent = () => {
 				<div className="wrapper">
 					<form action="">
 						<h1>User Profile</h1>
+						<h1>{error?.message}</h1>
 						<div className="input-box">
 							<input
 								type="text"
 								name="username"
 								placeholder="Username"
 								onChange={isUsername}
-								value={userName}
+								defaultValue={userName}
 							/>
 						</div>
 						<div className="input-box">
@@ -66,7 +109,7 @@ const Profilecomponent = () => {
 								name="email"
 								placeholder="Email"
 								onChange={isEmail}
-								value={email}
+								defaultValue={email}
 							/>
 						</div>
 						<button
@@ -77,7 +120,8 @@ const Profilecomponent = () => {
 						</button>
 						<button
 							type="button"
-							className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-e-lg hover:bg-gray-900 hover:text-white  dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700">
+							className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-e-lg hover:bg-gray-900 hover:text-white  dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700"
+							onClick={submitDelete}>
 							Delete
 						</button>
 					</form>

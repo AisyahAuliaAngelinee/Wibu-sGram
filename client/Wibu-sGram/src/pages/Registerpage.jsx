@@ -7,6 +7,7 @@ const Register = () => {
 	const [userName, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -35,8 +36,11 @@ const Register = () => {
 			navigate("/login");
 		} catch (error) {
 			console.log(error);
+			setError(error);
 		}
 	};
+
+	// if (error) return <p>{error.message}</p>;
 
 	return (
 		<>
@@ -44,6 +48,7 @@ const Register = () => {
 				<div className="wrapper">
 					<form action="">
 						<h1>REGISTER</h1>
+						<h1>{error?.message}</h1>
 						<div className="input-box">
 							<input
 								type="text"

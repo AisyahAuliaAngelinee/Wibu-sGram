@@ -51,7 +51,10 @@ class Controller {
 
 			if (!isValid) throw new Error("INVALID EMAIL/PASSWORD");
 
-			const payload = { id: findUser.id, email };
+			const payload = {
+				id: findUser.id,
+				email,
+			};
 			const token = signToken(payload);
 
 			res.status(200).json({
