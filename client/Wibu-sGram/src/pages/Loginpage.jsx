@@ -25,12 +25,10 @@ const Login = () => {
 				email,
 				password,
 			});
-			console.log(response.data, "<<<< response");
+			// console.log(response.data, "<<<< response");
 
 			localStorage.setItem("token", response.data.access_token);
 			localStorage.setItem("id", response.data.id);
-			localStorage.setItem("userName", response.data.userName);
-			localStorage.setItem("email", response.data.email);
 
 			navigate("/home");
 		} catch (error) {
@@ -71,6 +69,15 @@ const Login = () => {
 						</div>
 					</form>
 					<GoogleLoginButton />
+					<div className="discord-login">
+						<Link
+							id="login"
+							to="https://discord.com/api/oauth2/authorize?client_id=1174637853511262278&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fdiscord&response_type=token&scope=identify"
+							className="dc-login">
+							<i className="fa-brands fa-discord text-2xl"></i>
+							<span>Login with Discord</span>
+						</Link>
+					</div>
 				</div>
 			</section>
 		</>
