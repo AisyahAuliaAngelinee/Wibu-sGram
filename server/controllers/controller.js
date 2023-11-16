@@ -2,6 +2,7 @@ const { verifyPassword } = require("../helpers/bcrypt");
 const { User } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
+const axios = require("axios");
 
 class Controller {
 	static async registerPage(req, res, next) {
@@ -188,7 +189,8 @@ class Controller {
 
 	static async showPost(req, res, next) {
 		try {
-			res.send("Masuk");
+			const fetchData = await axios.get(`https://api.waifu.pics/type/category`);
+			console.log(fetchData, "<< data");
 		} catch (error) {
 			console.log(error);
 		}
