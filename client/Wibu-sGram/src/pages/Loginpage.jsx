@@ -25,9 +25,12 @@ const Login = () => {
 				email,
 				password,
 			});
-			// console.log(response.data, "<<<< response");
+			console.log(response.data, "<<<< response");
 
 			localStorage.setItem("token", response.data.access_token);
+			localStorage.setItem("id", response.data.id);
+			localStorage.setItem("userName", response.data.userName);
+			localStorage.setItem("email", response.data.email);
 
 			navigate("/home");
 		} catch (error) {

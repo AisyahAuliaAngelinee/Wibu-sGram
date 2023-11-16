@@ -43,6 +43,7 @@ class Controller {
 					email,
 				},
 			});
+			console.log(findUser, "<<< find user");
 
 			if (!findUser) throw new Error("INVALID EMAIL/PASSWORD");
 
@@ -53,7 +54,12 @@ class Controller {
 			const payload = { id: findUser.id, email };
 			const token = signToken(payload);
 
-			res.status(200).json({ access_token: token });
+			res.status(200).json({
+				access_token: token,
+				id: findUser.id,
+				userName: findUser.userName,
+				email: findUser.email,
+			});
 		} catch (error) {
 			console.log(error);
 			let code = 500;
@@ -63,6 +69,26 @@ class Controller {
 				res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
 
 			res.status(code).json(message);
+		}
+	}
+
+	static async populateUser(req, res, next) {
+		try {
+			// console.log("MASUK DULU");
+			// console.log(req.params);
+
+			const { id } = req.params;
+			const userData = await User.findByPk(id, {
+				attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+			});
+			// console.log(userData, "user");
+
+			res
+				.status(200)
+				.json({ userName: userData.userName, email: userData.email });
+		} catch (error) {
+			console.log(error);
+			res.status(404).json({ message: "USER NOT FOUND" });
 		}
 	}
 

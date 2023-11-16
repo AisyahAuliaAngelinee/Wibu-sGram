@@ -8,6 +8,7 @@ router.post("/googleLogin", Controller.googleLogin);
 
 router.use(authentication);
 
+router.get("/update/:id", Controller.populateUser);
 router.put("/update/:id", Controller.updateUser);
 router.delete("/delete/:id", Controller.deleteUser);
 router.get("/", Controller.showPost);

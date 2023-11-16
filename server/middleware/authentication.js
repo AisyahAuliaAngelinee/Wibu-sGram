@@ -14,7 +14,11 @@ const authenticaiton = async (req, res, next) => {
 
 		if (!findUser) throw new Error("USER NOT FOUND");
 
-		req.loginInfo = { userId: verified.id, email: verified.email };
+		req.loginInfo = {
+			userId: verified.id,
+			userName: verified.userName,
+			email: verified.email,
+		};
 
 		next();
 	} catch (error) {
