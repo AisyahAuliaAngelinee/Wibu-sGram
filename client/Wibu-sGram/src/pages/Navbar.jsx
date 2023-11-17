@@ -7,10 +7,7 @@ const Navbar = () => {
 		<>
 			<header>
 				<Link to={"#"} className="logo">
-					<img
-						src="/public/wibusgram-high-resolution-logo-transparent.png"
-						alt=""
-					/>
+					<img src="/public/wibusgram.svg" alt="" />
 				</Link>
 				<div className="icons">
 					<i className="fas fa-bars" id="menu-bars"></i>
