@@ -1,7 +1,13 @@
 const Artsform = () => {
 	return (
 		<>
-			<h1>ARTS</h1>
+			<form>
+				<label>Title</label>
+				<input type="text"></input>
+				<label>imageUrl</label>
+				<input type="text"></input>
+				<button type="submit">CREATE</button>
+			</form>
 		</>
 	);
 };

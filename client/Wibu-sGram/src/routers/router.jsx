@@ -6,6 +6,7 @@ import Homepage from "../pages/Hompage";
 import Postpage from "../pages/Postpage";
 import Profilecomponent from "../components/Profilecomponent";
 import Myarts from "../pages/Myartspage";
+import Artsform from "../components/Artsform";
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
 			{
 				path: "/myarts",
 				element: <Myarts />,
+			},
+			{
+				path: "/add-arts",
+				element: <Artsform />,
 			},
 		],
 	},

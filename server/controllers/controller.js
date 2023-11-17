@@ -1,5 +1,5 @@
 const { verifyPassword } = require("../helpers/bcrypt");
-const { User } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
@@ -204,6 +204,47 @@ class Controller {
 			);
 			// console.log(fetchWaifu);
 			res.status(200).json(fetchWaifu.data);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async addNewArts(req, res, next) {
+		try {
+			const newArt = await Post.create({
+				title: req.body.title,
+				imgUrl: req.body.imgUrl,
+			});
+			// console.log(newArt);
+
+			res.status(201).json({
+				message: "NEW ARTS HAS BEEN ADDED",
+				newArt,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async showArts(req, res, next) {
+		try {
+			const dataArts = await Post.findAll();
+			// console.log(dataArts, "<<<<<");
+			res.status(200).json(dataArts);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async deleteArts(req, res, next) {
+		try {
+			await Post.destroy({
+				where: {
+					id: req.params.id,
+				},
+			});
+
+			res.status(200).json({ message: "ART DELETED" });
 		} catch (error) {
 			console.log(error);
 		}
