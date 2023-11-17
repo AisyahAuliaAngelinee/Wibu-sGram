@@ -14,10 +14,6 @@
 		"dialect": "mysql"
 	},
 	"production": {
-		"username": "root",
-		"password": null,
-		"database": "database_production",
-		"host": "127.0.0.1",
-		"dialect": "mysql"
+		"use_env_variable": "postgresql://postgres:OmqMyFUxRAi7k2Ey@db.qhrnbkhyjngygymjpuwi.supabase.co:5432/postgres"
 	}
 }
