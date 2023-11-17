@@ -26,7 +26,7 @@ const Register = () => {
 	const submitRegister = async (event) => {
 		event.preventDefault();
 		try {
-			await axios.post("http://localhost:3000/register", {
+			await axios.post("https://vclrshna.online/register", {
 				userName,
 				email,
 				password,

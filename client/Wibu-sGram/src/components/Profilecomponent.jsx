@@ -28,11 +28,14 @@ const Profilecomponent = () => {
 	useEffect(() => {
 		async function fetchUser() {
 			try {
-				const { data } = await axios.get(`http://localhost:3000/update/${id}`, {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
+				const { data } = await axios.get(
+					`https://vclrshna.online/update/${id}`,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				);
 				// console.log(data, "<< Datas");
 
 				setUsername(data.userName);
@@ -51,7 +54,7 @@ const Profilecomponent = () => {
 		try {
 			// setLoading(true);
 			const { data } = await axios.put(
-				`http://localhost:3000/update/${id}`,
+				`https://vclrshna.online/update/${id}`,
 				{
 					userName,
 					email,
@@ -76,7 +79,7 @@ const Profilecomponent = () => {
 
 	async function submitDelete() {
 		try {
-			await axios.delete(`http://localhost:3000/delete/${id}`, {
+			await axios.delete(`https://vclrshna.online/delete/${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 

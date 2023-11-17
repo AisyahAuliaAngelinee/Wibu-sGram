@@ -8,7 +8,7 @@ const Myarts = () => {
 
 	async function fetchArts() {
 		try {
-			const { data } = await axios.get("http://localhost:3000/arts");
+			const { data } = await axios.get("https://vclrshna.online/arts");
 			setArts(data);
 		} catch (error) {
 			console.log(error);
@@ -24,7 +24,7 @@ const Myarts = () => {
 
 	const deleteArts = async () => {
 		try {
-			await axios.delete(`http://localhost:3000/delete/${id}`);
+			await axios.delete(`https://vclrshna.online/delete/${id}`);
 			navigate("/myarts");
 		} catch (error) {
 			console.log(error);
@@ -34,21 +34,21 @@ const Myarts = () => {
 	return (
 		<>
 			<section className="waifu" id="waifu">
-				<Link to={"/add-arts"}>
+				{/* <Link to={"/add-arts"}>
 					<button className="text-white px-2.5 py-1 rounded text-sm font-medium bg-blue-800 border-0 border-l hover:bg-[#15803d] dark:hover:text-white">
 						Add More
 					</button>
-				</Link>
+				</Link> */}
 				<div className="box-container">
 					{arts.map((a) => (
 						<div className="box flex flex-col items-center">
 							<img src={a.imgUrl} alt="" />
 							<span>{a.title}</span>
-							<button
+							{/* <button
 								className="text-white px-2.5 py-1 rounded text-sm font-medium bg-blue-800 border-0 border-l hover:bg-[#15803d] dark:hover:text-white"
 								onClick={deleteArts}>
 								Delete
-							</button>
+							</button> */}
 						</div>
 					))}
 				</div>
