@@ -18,7 +18,8 @@ export default function GoogleLoginButton() {
 			);
 			// console.log(data, "<<<< DATA");
 			localStorage.setItem("access_token", data);
-			navigate("/register");
+
+			navigate("/home");
 		} catch (error) {
 			console.log(error);
 		}
@@ -30,9 +31,6 @@ export default function GoogleLoginButton() {
 				onSuccess={(credentialResponse) => {
 					// console.log(credentialResponse);
 					googleLogin(credentialResponse);
-				}}
-				onError={() => {
-					console.log("Login Failed");
 				}}
 			/>
 		</>

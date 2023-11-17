@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
 
 :root {
-	--blue: #1c6dd0;
+	--primary-blue: #004fd9;
+	--secondary-blue: #5182f0;
+	--accent-color: #d94e28;
 	--black: #272829;
 	--white: #fff;
-	--light-color: #c2d1dd;
-	--white-light-color: #dce4ea;
-	--white-light-color2: #e3e3e3;
+	--foreground: #efefef;
+	--background: var(--accent-color);
 	--box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 
@@ -22,12 +23,9 @@
 	transition: all 0.2s linear;
 }
 
-a {
-	text-decoration: none;
-}
-
-ul {
-	list-style: none;
+*::selection {
+	background: var(--accent-color);
+	color: var(--foreground);
 }
 
 html {
@@ -37,10 +35,231 @@ html {
 	scroll-padding-top: 5.5rem;
 }
 
-section {
-	padding: 1rem 9%;
-	/* background: var(--white-light-color); */
+body {
+	overflow-x: hidden;
 }
+
+section {
+	min-height: 100dvh;
+	padding: 1rem 10%;
+	padding-top: 7rem;
+}
+
+.btn {
+	font-size: 1rem;
+	padding: 0.4rem 1.6rem;
+	border-radius: 5rem;
+	margin-top: 1rem;
+	background: none;
+	color: var(--accent-color);
+	cursor: pointer;
+	border: 0.2rem solid var(--accent-color);
+}
+
+.btn:hover {
+	background: var(--primary-blue);
+	border: 0.2rem solid var(--foreground);
+	color: var(--white);
+}
+
+html::-webkit-scrollbar {
+	width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+	background: var(--accent-color);
+}
+
+html::-webkit-scrollbar-thumb {
+	background: var(--secondary-blue);
+}
+
+/* NAVBAR START */
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	background: var(--foreground);
+	padding: 1.2rem 10%;
+	box-shadow: 0 0.3rem 2rem rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .logo img {
+	height: 1.5rem;
+}
+
+header .navbar ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	list-style: none;
+}
+
+header .navbar ul li {
+	margin-left: 3rem;
+}
+
+header .navbar ul li a {
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: var(--primary-blue);
+}
+
+header .navbar ul li a:hover {
+	color: var(--accent-color);
+}
+
+header #menu-bars {
+	font-size: 1.4rem;
+	color: var(--accent-color);
+	cursor: pointer;
+	display: none;
+}
+/* NAVBAR END */
+
+/* HOME START */
+.home {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.home::before,
+.home::after {
+	content: "";
+	position: absolute;
+	top: 5rem;
+	right: -6rem;
+	background: var(--secondary-blue);
+	border-radius: 5rem;
+	transform: rotate(-45deg);
+	height: 40rem;
+	width: 70rem;
+	z-index: -2;
+	animation: animate 0.5s linear 1;
+}
+
+@keyframes animate {
+	0% {
+		transform: rotate(-45deg) translateY(-40rem);
+	}
+}
+
+.home::before {
+	top: -7rem;
+	background: var(--foreground);
+	box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.1);
+	z-index: -1;
+}
+
+.home .image {
+	flex: 1 1 33.5rem;
+}
+
+.home .image img {
+	width: 100%;
+}
+
+.home .content {
+	flex: 1 1 39rem;
+}
+
+.home .content h3 {
+	color: var(--primary-blue);
+	font-size: 3rem;
+}
+
+.home .content p {
+	color: var(--black);
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 1rem 0;
+}
+/* HOME END */
+
+/* PROFILE FORM START */
+.profile-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100dvh;
+	background: url(https://sm.ign.com/ign_nordic/cover/l/little-wit/little-witch-academia_dcpm.jpg)
+		no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.profile-page .wrapper {
+	width: 420px;
+	background: transparent;
+	border-radius: 0.8rem;
+	padding: 1rem 2rem;
+	backdrop-filter: blur(0.7rem);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-page .wrapper h1 {
+	font-size: 2.5rem;
+	text-align: center;
+	font-weight: bold;
+	color: var(--foreground);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.profile-page .wrapper .input-box {
+	width: 100%;
+	height: 50px;
+	background: var(--foreground);
+	border-radius: 0.5rem;
+	margin: 30px 0;
+}
+
+.profile-page .wrapper .input-box input {
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 0.2rem solid rgb(255, 255, 255, 0.2);
+	border-radius: 0.3rem;
+	padding: 20px 45px 20px 20px;
+}
+
+.profile-page .wrapper .input-box input::placeholder {
+	color: var(--black);
+}
+
+.profile-page .wrapper .login-link {
+	font-size: 1rem;
+	text-align: center;
+	margin: 2rem 0 1rem;
+}
+
+.profile-page .wrapper .login-link p {
+	color: var(--white);
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.profile-page .wrapper .login-link p a {
+	color: var(--accent-color);
+	text-decoration: none;
+	font-weight: 600;
+	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
+}
+
+.profile-page .wrapper .login-link p a:hover {
+	text-decoration: underline;
+}
+/* PROFILE FORM END */
 
 /* LOGIN FORM START */
 .login-page {
@@ -67,14 +286,14 @@ section {
 	font-size: 2.5rem;
 	text-align: center;
 	font-weight: bold;
-	color: var(--white);
+	color: var(--secondary-blue);
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
 }
 
 .login-page .wrapper .input-box {
 	width: 100%;
 	height: 50px;
-	background: var(--white-light-color2);
+	background: var(--foreground);
 	border-radius: 0.5rem;
 	margin: 30px 0;
 }
@@ -97,7 +316,7 @@ section {
 .login-page .wrapper .btn-login {
 	width: 100%;
 	height: 2.3rem;
-	background: var(--blue);
+	background: var(--primary-blue);
 	border: none;
 	outline: none;
 	border-radius: 1.3rem;
@@ -121,7 +340,7 @@ section {
 }
 
 .login-page .wrapper .register-link p a {
-	color: var(--blue);
+	color: var(--secondary-blue);
 	text-decoration: none;
 	font-weight: 600;
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
@@ -157,14 +376,14 @@ section {
 	font-size: 2.5rem;
 	text-align: center;
 	font-weight: bold;
-	color: var(--white);
+	color: var(--accent-color);
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
 }
 
 .regis-page .wrapper .input-box {
 	width: 100%;
 	height: 50px;
-	background: var(--white-light-color2);
+	background: var(--foreground);
 	border-radius: 0.5rem;
 	margin: 30px 0;
 }
@@ -187,7 +406,7 @@ section {
 .regis-page .wrapper .btn-regis {
 	width: 100%;
 	height: 2.3rem;
-	background: var(--blue);
+	background: var(--accent-color);
 	border: none;
 	outline: none;
 	border-radius: 1.3rem;
@@ -211,7 +430,7 @@ section {
 }
 
 .regis-page .wrapper .login-link p a {
-	color: var(--blue);
+	color: var(--accent-color);
 	text-decoration: none;
 	font-weight: 600;
 	text-shadow: 0 0 1rem rgba(0, 0, 0, 0.682);
@@ -221,3 +440,96 @@ section {
 	text-decoration: underline;
 }
 /* REGISTER FORM END */
+
+/* WAIFU START */
+.sub-heading {
+	text-align: center;
+	color: var(--primary-blue);
+	font-size: 3rem;
+	padding-top: 1rem;
+	padding-bottom: 1.5rem;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.waifu .box-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	gap: 1.5rem;
+}
+
+.waifu .box-container .box {
+	padding: 1.5rem;
+	background: var(--white);
+	border-radius: 0.5rem;
+	border: 0.1rem solid rgba(0, 0, 0, 0.2);
+	box-shadow: var(--box-shadow);
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+}
+
+.waifu .box-container .box img {
+	height: auto;
+	width: 100%;
+	border-radius: 5%;
+}
+
+.waifu .box-container .box span {
+	color: var(--primary-blue);
+	font-weight: bolder;
+	margin-right: 1rem;
+	font-size: 2.5rem;
+}
+
+.waifu .box-container .box p {
+	margin-bottom: 1rem;
+}
+/* WAIFU END */
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+	html {
+		font-size: 99%;
+		scroll-behavior: smooth;
+		scroll-padding-top: 5.5rem;
+	}
+
+	header #menu-bars {
+		display: block;
+	}
+
+	header .navbar {
+		position: fixed;
+		top: 8rem;
+		left: 0;
+		width: 100%;
+		background: var(--secondary-blue);
+		border-top: 0.2rem solid rgba(0, 0, 0, 0.1);
+		transform: scaleY(0);
+		transform-origin: top;
+		opacity: 0;
+	}
+
+	header .navbar ul {
+		flex-flow: column;
+		padding: 1%;
+	}
+
+	header .navbar ul li {
+		margin: 0.4rem;
+		width: 100%;
+	}
+
+	header .navbar ul li a {
+		display: block;
+		color: var(--foreground);
+		padding-left: 2rem;
+		border-left: 0.2rem solid var(--accent-color);
+		font-size: 1rem;
+	}
+
+	header .navbar ul li a:hover {
+		color: var(--accent-color);
+		border-color: var(--accent-color);
+	}
+}

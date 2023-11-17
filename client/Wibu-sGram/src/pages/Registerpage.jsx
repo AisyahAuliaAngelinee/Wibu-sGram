@@ -7,6 +7,7 @@ const Register = () => {
 	const [userName, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -35,16 +36,20 @@ const Register = () => {
 			navigate("/login");
 		} catch (error) {
 			console.log(error);
+			setError(error);
 		}
 	};
 
+	// if (error) return <p>{error.message}</p>;
+
 	return (
 		<>
-			<section class="regis-page">
-				<div class="wrapper">
+			<section className="regis-page">
+				<div className="wrapper">
 					<form action="">
 						<h1>REGISTER</h1>
-						<div class="input-box">
+						<h1>{error?.message}</h1>
+						<div className="input-box">
 							<input
 								type="text"
 								name="username"
@@ -53,7 +58,7 @@ const Register = () => {
 								value={userName}
 							/>
 						</div>
-						<div class="input-box">
+						<div className="input-box">
 							<input
 								type="email"
 								name="email"
@@ -62,7 +67,7 @@ const Register = () => {
 								value={email}
 							/>
 						</div>
-						<div class="input-box">
+						<div className="input-box">
 							<input
 								type="password"
 								name="password"
@@ -71,12 +76,12 @@ const Register = () => {
 								value={password}
 							/>
 						</div>
-						<button class="btn-regis" onClick={submitRegister}>
+						<button className="btn-regis" onClick={submitRegister}>
 							Register
 						</button>
-						<div class="login-link">
+						<div className="login-link">
 							<p>
-								Already have an account? <Link to="/login">Login</Link>
+								Already have an account? <Link to="/">Login</Link>
 							</p>
 						</div>
 					</form>

@@ -1,7 +1,8 @@
 const { verifyPassword } = require("../helpers/bcrypt");
-const { User } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
+const axios = require("axios");
 
 class Controller {
 	static async registerPage(req, res, next) {
@@ -43,6 +44,7 @@ class Controller {
 					email,
 				},
 			});
+			console.log(findUser, "<<< find user");
 
 			if (!findUser) throw new Error("INVALID EMAIL/PASSWORD");
 
@@ -50,10 +52,18 @@ class Controller {
 
 			if (!isValid) throw new Error("INVALID EMAIL/PASSWORD");
 
-			const payload = { id: findUser.id, email };
+			const payload = {
+				id: findUser.id,
+				email,
+			};
 			const token = signToken(payload);
 
-			res.status(200).json({ access_token: token });
+			res.status(200).json({
+				access_token: token,
+				id: findUser.id,
+				userName: findUser.userName,
+				email: findUser.email,
+			});
 		} catch (error) {
 			console.log(error);
 			let code = 500;
@@ -63,6 +73,26 @@ class Controller {
 				res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
 
 			res.status(code).json(message);
+		}
+	}
+
+	static async populateUser(req, res, next) {
+		try {
+			// console.log("MASUK DULU");
+			// console.log(req.params);
+
+			const { id } = req.params;
+			const userData = await User.findByPk(id, {
+				attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+			});
+			// console.log(userData, "user");
+
+			res
+				.status(200)
+				.json({ userName: userData.userName, email: userData.email });
+		} catch (error) {
+			console.log(error);
+			res.status(404).json({ message: "USER NOT FOUND" });
 		}
 	}
 
@@ -121,8 +151,7 @@ class Controller {
 
 	static async googleLogin(req, res, next) {
 		try {
-			// console.log(req.headers);
-			// console.log("lllllll");
+			console.log(req.headers);
 			const { token } = req.headers;
 			const client = new OAuth2Client();
 
@@ -157,9 +186,65 @@ class Controller {
 		}
 	}
 
-	static async showPost(req, res, next) {
+	static async waifuTag(req, res, next) {
 		try {
-			res.send("Masuk");
+			// console.log("masuk");
+			const fetchWaifuByTag = await axios.get("https://api.waifu.im/tags");
+			// console.log(fetchWaifu);
+			res.status(200).json(fetchWaifuByTag.data);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async waifuData(req, res, next) {
+		try {
+			const fetchWaifu = await axios.get(
+				"https://api.waifu.im/search?is_nsfw=false&many=true"
+			);
+			// console.log(fetchWaifu);
+			res.status(200).json(fetchWaifu.data);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async addNewArts(req, res, next) {
+		try {
+			const newArt = await Post.create({
+				title: req.body.title,
+				imgUrl: req.body.imgUrl,
+			});
+			// console.log(newArt);
+
+			res.status(201).json({
+				message: "NEW ARTS HAS BEEN ADDED",
+				newArt,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async showArts(req, res, next) {
+		try {
+			const dataArts = await Post.findAll();
+			// console.log(dataArts, "<<<<<");
+			res.status(200).json(dataArts);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	static async deleteArts(req, res, next) {
+		try {
+			await Post.destroy({
+				where: {
+					id: req.params.id,
+				},
+			});
+
+			res.status(200).json({ message: "ART DELETED" });
 		} catch (error) {
 			console.log(error);
 		}
