@@ -24,7 +24,7 @@ const Navbar = () => {
 							<Link to={"/home"}>Utama</Link>
 						</li>
 						<li>
-							<Link to={"#"}>Waifu</Link>
+							<Link to={"/myarts"}>MyArts</Link>
 						</li>
 						<li>
 							<Link to={`/profile/${id}`}>Profil</Link>

@@ -3,8 +3,6 @@ const { User } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
-const passport = require("passport");
-const DiscordStrategy = require("passport-discord").Strategy;
 
 class Controller {
 	static async registerPage(req, res, next) {
@@ -188,20 +186,24 @@ class Controller {
 		}
 	}
 
-	static async discord(req, res, next) {
+	static async waifuTag(req, res, next) {
 		try {
-			console.log(req.headers);
+			// console.log("masuk");
+			const fetchWaifuByTag = await axios.get("https://api.waifu.im/tags");
+			// console.log(fetchWaifu);
+			res.status(200).json(fetchWaifuByTag.data);
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
-	static async showPost(req, res, next) {
+	static async waifuData(req, res, next) {
 		try {
-			const fetchData = await axios.get(
-				`https://danbooru.donmai.us/profile.json?api_key=nWVQVRzJkAjwiDLqvfwZ8G4Q&login=auliaangelinee`
+			const fetchWaifu = await axios.get(
+				"https://api.waifu.im/search?is_nsfw=false&many=true"
 			);
-			console.log(fetchData, "<< data");
+			// console.log(fetchWaifu);
+			res.status(200).json(fetchWaifu.data);
 		} catch (error) {
 			console.log(error);
 		}

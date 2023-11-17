@@ -441,6 +441,51 @@ header #menu-bars {
 }
 /* REGISTER FORM END */
 
+/* WAIFU START */
+.sub-heading {
+	text-align: center;
+	color: var(--primary-blue);
+	font-size: 3rem;
+	padding-top: 1rem;
+	padding-bottom: 1.5rem;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.waifu .box-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	gap: 1.5rem;
+}
+
+.waifu .box-container .box {
+	padding: 1.5rem;
+	background: var(--white);
+	border-radius: 0.5rem;
+	border: 0.1rem solid rgba(0, 0, 0, 0.2);
+	box-shadow: var(--box-shadow);
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+}
+
+.waifu .box-container .box img {
+	height: auto;
+	width: 100%;
+	border-radius: 5%;
+}
+
+.waifu .box-container .box span {
+	color: var(--primary-blue);
+	font-weight: bolder;
+	margin-right: 1rem;
+	font-size: 2.5rem;
+}
+
+.waifu .box-container .box p {
+	margin-bottom: 1rem;
+}
+/* WAIFU END */
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
 	html {

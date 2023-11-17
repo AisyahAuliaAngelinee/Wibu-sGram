@@ -5,6 +5,7 @@ import Register from "../pages/Registerpage";
 import Homepage from "../pages/Hompage";
 import Postpage from "../pages/Postpage";
 import Profilecomponent from "../components/Profilecomponent";
+import Myarts from "../pages/Myartspage";
 
 const router = createBrowserRouter([
 	{
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
 			{
 				path: "/post",
 				element: <Postpage />,
+			},
+			{
+				path: "/myarts",
+				element: <Myarts />,
 			},
 		],
 	},
