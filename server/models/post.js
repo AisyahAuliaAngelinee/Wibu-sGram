@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			this.belongsTo(models.User, { foreignKey: "AuthorId" });
 		}
 	}
 	Post.init(
@@ -27,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
 				validate: {
 					notNull: true,
 					notEmpty: true,
+				},
+			},
+			description: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					notNull: { msg: "Description cannot be null" },
+					notEmpty: false,
 				},
 			},
 		},

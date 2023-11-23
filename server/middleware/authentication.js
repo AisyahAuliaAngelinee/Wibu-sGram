@@ -17,7 +17,7 @@ const authenticaiton = async (req, res, next) => {
 		}
 
 		req.loginInfo = {
-			userId: verified.id,
+			AuthorId: verified.id,
 			userName: verified.userName,
 			email: verified.email,
 		};

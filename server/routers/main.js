@@ -6,8 +6,7 @@ const authentication = require("../middleware/authentication");
 router.get("/", Controller.waifuData);
 router.get("/tag", Controller.waifuTag);
 router.get("/arts", Controller.showArts);
-router.post("/add-arts", Controller.addNewArts);
-router.delete("/delete/:id", Controller.deleteArts);
+router.delete("/post/:id", Controller.deleteArts);
 
 // GOOGLE LOGIN
 router.post("/googleLogin", Controller.googleLogin);
@@ -18,6 +17,7 @@ router.post("/login", Controller.login);
 
 router.use(authentication);
 
+router.post("/add-arts", Controller.addArts);
 router.put("/:id", Controller.userUpdate);
 router.delete("/:id", Controller.deleteUser);
 

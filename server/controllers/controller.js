@@ -194,37 +194,38 @@ class Controller {
 
 	static async waifuTag(req, res, next) {
 		try {
-			// console.log("masuk");
 			const fetchWaifuByTag = await axios.get("https://api.waifu.im/tags");
-			// console.log(fetchWaifu);
 			res.status(200).json(fetchWaifuByTag.data);
 		} catch (error) {
 			console.log(error);
+			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
 		}
 	}
 
 	static async waifuData(req, res, next) {
 		try {
 			const fetchWaifu = await axios.get("https://api.waifu.im/search?is_nsfw=false&many=true");
-			// console.log(fetchWaifu);
 			res.status(200).json(fetchWaifu.data);
 		} catch (error) {
 			console.log(error);
+			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
 		}
 	}
 
-	static async addNewArts(req, res, next) {
+	static async addArts(req, res, next) {
 		try {
-			const newArt = await Post.create({
-				title: req.body.title,
-				imgUrl: req.body.imgUrl,
+			const { title, imgUrl } = req.body;
+			const newArts = await Post.create({
+				title,
+				imgUrl,
+				description: req.body.description,
+				AuthorId: req.loginInfo.AuthorId,
 			});
-			// console.log(newArt);
-
-			res.status(201).json({
-				message: "NEW ARTS HAS BEEN ADDED",
-				newArt,
-			});
+			// console.log(newArts, "<<< Arts");
+			// res.status(201).json({
+			// 	message: "NEW ARTS HAS BEEN ADDED",
+			// 	newArt,
+			// });
 		} catch (error) {
 			console.log(error);
 		}
