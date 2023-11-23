@@ -28,14 +28,11 @@ const Profilecomponent = () => {
 	useEffect(() => {
 		async function fetchUser() {
 			try {
-				const { data } = await axios.get(
-					`https://vclrshna.online/update/${id}`,
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-						},
-					}
-				);
+				const { data } = await axios.get(`https://vclrshna.online/update/${id}`, {
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				});
 				// console.log(data, "<< Datas");
 
 				setUsername(data.userName);
@@ -98,33 +95,15 @@ const Profilecomponent = () => {
 						<h1>User Profile</h1>
 						<h1>{error?.message}</h1>
 						<div className="input-box">
-							<input
-								type="text"
-								name="username"
-								placeholder="Username"
-								onChange={isUsername}
-								defaultValue={userName}
-							/>
+							<input type="text" name="username" placeholder="Username" onChange={isUsername} defaultValue={userName} />
 						</div>
 						<div className="input-box">
-							<input
-								type="email"
-								name="email"
-								placeholder="Email"
-								onChange={isEmail}
-								defaultValue={email}
-							/>
+							<input type="email" name="email" placeholder="Email" onChange={isEmail} defaultValue={email} />
 						</div>
-						<button
-							type="button"
-							className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-s-lg hover:bg-blue-900 hover:text-white focus:text-white  dark:hover:text-white dark:hover:bg-blue-700"
-							onClick={submitUpdate}>
+						<button type="button" className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-s-lg hover:bg-blue-900 hover:text-white focus:text-white  dark:hover:text-white dark:hover:bg-blue-700" onClick={submitUpdate}>
 							Update
 						</button>
-						<button
-							type="button"
-							className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-e-lg hover:bg-gray-900 hover:text-white  dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700"
-							onClick={submitDelete}>
+						<button type="button" className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-e-lg hover:bg-gray-900 hover:text-white  dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700" onClick={submitDelete}>
 							Delete
 						</button>
 					</form>

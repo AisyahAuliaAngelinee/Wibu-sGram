@@ -25,18 +25,18 @@ const Navbar = () => {
 				<nav className="navbar">
 					<ul>
 						<li>
-							<Link to={"/"} onClick={logoutHandler}>
-								Pulang
-							</Link>
-						</li>
-						<li>
-							<Link to={"/home"}>Utama</Link>
+							<Link to={"/"}>Utama</Link>
 						</li>
 						<li>
 							<Link to={"/myarts"}>MyArts</Link>
 						</li>
 						<li>
-							<Link to={`/profile/${id}`}>Profil</Link>
+							<Link to={`/login`}>Profil</Link>
+						</li>
+						<li>
+							<Link to={"/"} onClick={logoutHandler}>
+								Logout
+							</Link>
 						</li>
 					</ul>
 				</nav>
