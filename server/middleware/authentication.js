@@ -35,6 +35,7 @@ const authenticaiton = async (req, res, next) => {
 		}
 
 		res.status(status).json(message);
+
 	}
 };
 
