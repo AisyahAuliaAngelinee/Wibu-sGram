@@ -18,16 +18,16 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					notNull: true,
-					notEmpty: true,
+					notNull: { msg: "Please enter post title" },
+					notEmpty: { msg: "Title cannot be empty" },
 				},
 			},
 			imgUrl: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					notNull: true,
-					notEmpty: true,
+					notNull: { msg: "Please enter image URL" },
+					notEmpty: { msg: "ImageURL cannot be empty" },
 				},
 			},
 			description: {

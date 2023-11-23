@@ -3,6 +3,7 @@ const { User, Post } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
+const e = require("express");
 
 class Controller {
 	static async register(req, res) {
@@ -121,7 +122,7 @@ class Controller {
 
 			// ?ERRORHANDLING
 			if (error.message === "ERROR USER NOT FOUND") {
-				status = 400;
+				status = 404;
 				message = "USER NOT FOUND";
 			}
 
@@ -129,7 +130,7 @@ class Controller {
 		}
 	}
 
-	static async deleteUser(req, res, next) {
+	static async deleteUser(req, res) {
 		try {
 			// res.send("Masuk Controller");
 			// console.log(req.params);
@@ -212,22 +213,64 @@ class Controller {
 		}
 	}
 
-	static async addArts(req, res, next) {
+	static async addArts(req, res) {
 		try {
-			const { title, imgUrl } = req.body;
+			const { title, imgUrl, description } = req.body;
 			const newArts = await Post.create({
 				title,
 				imgUrl,
-				description: req.body.description,
+				description,
 				AuthorId: req.loginInfo.AuthorId,
 			});
-			// console.log(newArts, "<<< Arts");
-			// res.status(201).json({
-			// 	message: "NEW ARTS HAS BEEN ADDED",
-			// 	newArt,
-			// });
+
+			res.status(201).json({ message: "POST CREATED", newArts });
 		} catch (error) {
-			console.log(error);
+			console.log(error.errors[0].message);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.errors[0].message === "Title cannot be empty") {
+				status = 400;
+				message = "PLEASE ENTER POST TITLE";
+			} else if (error.errors[0].message === "ImageURL cannot be empty") {
+				status = 400;
+				message = "PLEASE ENTER POST IMAGE LINK";
+			}
+
+			res.status(status).json(message);
+		}
+	}
+
+	static async updateArts(req, res) {
+		try {
+			const { id } = req.params;
+			const findPost = await Post.findByPk(id);
+			if (!findPost) throw new Error("POST ID NOT FOUND");
+
+			const { title, imgUrl, description } = req.body;
+			await Post.update(
+				{
+					title,
+					imgUrl,
+					description,
+				},
+				{
+					where: { id: findPost.id },
+				}
+			);
+
+			res.status(200).json({ message: "POST HAS BEEN UPDATED" });
+		} catch (error) {
+			console.log(error.message);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			if (error.message === "POST ID NOT FOUND") {
+				status = 404;
+				message = "POST ID NOT FOUND";
+			}
+			res.status(status).json(message);
 		}
 	}
 
@@ -241,17 +284,31 @@ class Controller {
 		}
 	}
 
-	static async deleteArts(req, res, next) {
+	static async deleteArts(req, res) {
 		try {
+			const { id } = req.params;
+			const findPost = await Post.findByPk(id);
+			if (!findPost) throw new Error("POST ID NOT FOUND");
+
 			await Post.destroy({
 				where: {
-					id: req.params.id,
+					id,
 				},
 			});
 
-			res.status(200).json({ message: "ART DELETED" });
+			res.status(200).json({ message: "POST HAS BEEN DELETED" });
 		} catch (error) {
 			console.log(error);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.message === "POST ID NOT FOUND") {
+				status = 404;
+				message = "POST ID NOT FOUND / HAS BEEN DELETED";
+			}
+
+			res.status(status).json(message);
 		}
 	}
 }
