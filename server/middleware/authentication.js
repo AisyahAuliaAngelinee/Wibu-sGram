@@ -3,7 +3,6 @@ const { User } = require("../models");
 
 const authenticaiton = async (req, res, next) => {
 	try {
-		// res.send(req.headers);
 		const { authorization } = req.headers;
 
 		if (!authorization) throw new Error("UNAUTHORIZED");
@@ -23,7 +22,6 @@ const authenticaiton = async (req, res, next) => {
 		next();
 	} catch (error) {
 		console.log(error);
-		res.status(404).json({ message: "USER NOT FOUND" });
 	}
 };
 

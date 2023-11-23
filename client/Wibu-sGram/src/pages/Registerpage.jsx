@@ -33,7 +33,7 @@ const Register = () => {
 			});
 			// console.log(response, "<<< Register");
 
-			navigate("/login");
+			navigate("/");
 		} catch (error) {
 			console.log(error);
 			setError(error);
@@ -50,31 +50,13 @@ const Register = () => {
 						<h1>REGISTER</h1>
 						<h1>{error?.message}</h1>
 						<div className="input-box">
-							<input
-								type="text"
-								name="username"
-								placeholder="Username"
-								onChange={isUsername}
-								value={userName}
-							/>
+							<input type="text" name="username" placeholder="Username" onChange={isUsername} value={userName} />
 						</div>
 						<div className="input-box">
-							<input
-								type="email"
-								name="email"
-								placeholder="Email"
-								onChange={isEmail}
-								value={email}
-							/>
+							<input type="email" name="email" placeholder="Email" onChange={isEmail} value={email} />
 						</div>
 						<div className="input-box">
-							<input
-								type="password"
-								name="password"
-								placeholder="Password"
-								onChange={isPassword}
-								value={password}
-							/>
+							<input type="password" name="password" placeholder="Password" onChange={isPassword} value={password} />
 						</div>
 						<button className="btn-regis" onClick={submitRegister}>
 							Register

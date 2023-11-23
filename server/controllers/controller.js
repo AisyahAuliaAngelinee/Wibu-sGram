@@ -69,8 +69,7 @@ class Controller {
 			let code = 500;
 			let message = "INTERNAL SERVER ERROR";
 
-			if (error.message == "INVALID EMAIL/PASSWORD")
-				res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
+			if (error.message == "INVALID EMAIL/PASSWORD") res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
 
 			res.status(code).json(message);
 		}
@@ -87,9 +86,7 @@ class Controller {
 			});
 			// console.log(userData, "user");
 
-			res
-				.status(200)
-				.json({ userName: userData.userName, email: userData.email });
+			res.status(200).json({ userName: userData.userName, email: userData.email });
 		} catch (error) {
 			console.log(error);
 			res.status(404).json({ message: "USER NOT FOUND" });
@@ -199,9 +196,7 @@ class Controller {
 
 	static async waifuData(req, res, next) {
 		try {
-			const fetchWaifu = await axios.get(
-				"https://api.waifu.im/search?is_nsfw=false&many=true"
-			);
+			const fetchWaifu = await axios.get("https://api.waifu.im/search?is_nsfw=false&many=true");
 			// console.log(fetchWaifu);
 			res.status(200).json(fetchWaifu.data);
 		} catch (error) {
