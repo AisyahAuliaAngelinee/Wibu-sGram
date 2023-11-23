@@ -2,20 +2,23 @@ const router = require("express").Router();
 const Controller = require("../controllers/controller");
 const authentication = require("../middleware/authentication");
 
+// PUBLIC
 router.get("/", Controller.waifuData);
 router.get("/tag", Controller.waifuTag);
 router.get("/arts", Controller.showArts);
 router.post("/add-arts", Controller.addNewArts);
 router.delete("/delete/:id", Controller.deleteArts);
 
-router.post("/register", Controller.registerPage);
-router.post("/login", Controller.loginPage);
+// GOOGLE LOGIN
 router.post("/googleLogin", Controller.googleLogin);
+
+// NORMAL LOGIN
+router.post("/register", Controller.register);
+router.post("/login", Controller.login);
 
 router.use(authentication);
 
-router.get("/update/:id", Controller.populateUser);
-router.put("/update/:id", Controller.updateUser);
-router.delete("/delete/:id", Controller.deleteUser);
+router.put("/:id", Controller.userUpdate);
+router.delete("/:id", Controller.deleteUser);
 
 module.exports = router;

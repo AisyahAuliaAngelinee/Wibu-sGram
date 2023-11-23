@@ -3,16 +3,18 @@ const { User } = require("../models");
 
 const authenticaiton = async (req, res, next) => {
 	try {
-		// res.send(req.headers);
 		const { authorization } = req.headers;
-
-		if (!authorization) throw new Error("UNAUTHORIZED");
+		if (!authorization) {
+			throw new Error("unauthorized");
+		}
 
 		const access_token = authorization.split(" ")[1];
 		const verified = verifyToken(access_token);
-		const findUser = await User.findByPk(verified.id);
 
-		if (!findUser) throw new Error("USER NOT FOUND");
+		const findUser = await User.findByPk(verified.id);
+		if (!findUser) {
+			throw new Error("USER NOT FOUND");
+		}
 
 		req.loginInfo = {
 			userId: verified.id,
@@ -22,8 +24,17 @@ const authenticaiton = async (req, res, next) => {
 
 		next();
 	} catch (error) {
-		console.log(error);
-		res.status(404).json({ message: "USER NOT FOUND" });
+		console.log(error.message);
+		let status = 500;
+		let message = "INTERNAL SERVER ERROR";
+
+		// ?ERRORHANDLING
+		if (error.message === "unauthorized") {
+			status = 401;
+			message = "USER UNAUTHORIZED";
+		}
+
+		res.status(status).json(message);
 	}
 };
 
