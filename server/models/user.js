@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			this.hasMany(models.Post, { foreignKey: "AuthorId" });
 		}
 	}
 	User.init(
@@ -18,24 +19,26 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					notEmpty: true,
-					notNull: true,
+					notNull: { msg: "Please enter your username" },
+					notEmpty: { msg: "Username cannot be empty" },
 				},
 			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				unique: true,
 				validate: {
-					notEmpty: true,
-					notNull: true,
+					isEmail: { msg: "Invalid email format" },
+					notNull: { msg: "Please enter your email" },
+					notEmpty: { msg: "Email cannot be empty" },
 				},
 			},
 			password: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					notEmpty: true,
-					notNull: true,
+					notNull: { msg: "Please enter your password" },
+					notEmpty: { msg: "Password cannot be empty" },
 				},
 			},
 		},

@@ -3,146 +3,156 @@ const { User, Post } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
+const e = require("express");
 
 class Controller {
-	static async registerPage(req, res, next) {
+	static async register(req, res) {
 		try {
-			// console.log("MAsuk");
-			// res.send(req.body);
-			const createUser = {
+			const newUser = {
 				userName: req.body.userName,
 				email: req.body.email,
 				password: req.body.password,
 			};
-			// res.send(createUser);
 
-			const newUser = await User.create(createUser);
-			// res.send(newUser);
+			const createUser = await User.create(newUser);
 
-			if (!newUser) {
-				throw new Error("INVALID CREATE USER");
+			res.status(201).json({ message: "CREATE USER SUCCESSFUL", createUser });
+		} catch (error) {
+			console.log(error.errors[0].message);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING PASSWORD
+			if (error.errors[0].message === "Please enter your password") {
+				status = 400;
+				message = "PLEASE ENTER YOUR PASSWORD";
+			} else if (error.errors[0].message === "Password cannot be empty") {
+				status = 400;
+				message = "PASSWORD CANNOT BE EMPTY";
 			}
 
-			res.status(201).json({
-				message: "CREATE USER SUCCESSFUL",
-			});
-		} catch (error) {
-			console.log(error);
-			res.status(400).json({
-				message: error,
-			});
+			// ?ERRORHANDLING EMAIL
+			if (error.errors[0].message === "Please enter your email") {
+				status = 400;
+				message = "PLEASE ENTER YOUR EMAIL";
+			} else if (error.errors[0].message === "Invalid email format") {
+				status = 400;
+				message = "INVALID EMAIL FORMAT";
+			} else if (error.errors[0].message === "Email cannot be empty") {
+				status = 400;
+				message = "EMAIL CANNOT BE EMPTY";
+			} else if (error.errors[0].message === "email must be unique") {
+				status = 400;
+				message = "EMAIL MUST BE UNIQUE";
+			}
+
+			// ?ERRORHANDLING USERNAME
+			if (error.errors[0].message === "Please enter your username") {
+				status = 400;
+				message = "PLEASE ENTER YOUR USERNAME";
+			} else if (error.errors[0].message === "Username cannot be empty") {
+				status = 400;
+				message = "USERNAME CANNOT BE EMPTY";
+			}
+
+			res.status(status).json(message);
 		}
 	}
 
-	static async loginPage(req, res, next) {
+	static async login(req, res) {
 		try {
-			// res.send(req.body);
 			const { email, password } = req.body;
-			// console.log(email, password);
 			const findUser = await User.findOne({
 				where: {
 					email,
 				},
 			});
-			console.log(findUser, "<<< find user");
+			if (!findUser) {
+				throw new Error("INVALID EMAIL/PASSWORD");
+			}
 
-			if (!findUser) throw new Error("INVALID EMAIL/PASSWORD");
-
-			const isValid = verifyPassword(password, findUser.password);
-
-			if (!isValid) throw new Error("INVALID EMAIL/PASSWORD");
+			const verifiedPassword = verifyPassword(password, findUser.password);
+			if (!verifiedPassword) {
+				throw new Error("INVALID EMAIL/PASSWORD");
+			}
 
 			const payload = {
 				id: findUser.id,
+				userName: findUser.userName,
 				email,
 			};
 			const token = signToken(payload);
 
-			res.status(200).json({
-				access_token: token,
-				id: findUser.id,
-				userName: findUser.userName,
-				email: findUser.email,
-			});
+			res.status(200).json({ message: "WE FOUND YOUR USER", access_token: token });
 		} catch (error) {
-			console.log(error);
-			let code = 500;
+			console.log(error.message);
+			let status = 500;
 			let message = "INTERNAL SERVER ERROR";
 
-			if (error.message == "INVALID EMAIL/PASSWORD") res.status(400).json({ message: "INVALID EMAIL/PASSWORD" });
+			// ?ERRORHANDLING
+			if (error.message === "INVALID EMAIL/PASSWORD") {
+				status = 400;
+				message = "INVALID EMAIL/PASSWORD";
+			}
 
-			res.status(code).json(message);
+			res.status(status).json(message);
 		}
 	}
 
-	static async populateUser(req, res, next) {
+	static async userUpdate(req, res) {
 		try {
-			// console.log("MASUK DULU");
-			// console.log(req.params);
-
 			const { id } = req.params;
-			const userData = await User.findByPk(id, {
-				attributes: { exclude: ["password", "createdAt", "updatedAt"] },
-			});
-			// console.log(userData, "user");
+			const findUserById = await User.findByPk(id);
+			if (!findUserById) throw new Error("ERROR USER NOT FOUND");
 
-			res.status(200).json({ userName: userData.userName, email: userData.email });
-		} catch (error) {
-			console.log(error);
-			res.status(404).json({ message: "USER NOT FOUND" });
-		}
-	}
-
-	static async updateUser(req, res, next) {
-		try {
-			// res.send("Masuk");
-			// console.log(req.body);
-
-			const { id } = req.params;
-			const idUser = await User.findByPk(id);
-
-			if (!idUser) throw new Error("ERROR NOT FOUND");
-
-			const updateUser = await User.update(
+			const { userName, email } = req.body;
+			await User.update(
 				{
-					userName: req.body.userName,
-					email: req.body.email,
+					userName,
+					email,
 				},
-				{
-					where: {
-						id,
-					},
-				}
+				{ where: { id } }
 			);
 
-			if (!updateUser) throw new Error("INVALID UPDATE PROFILE");
-
-			res.status(200).json({
-				message: "PROFILE UPDATE SUCCESSFULL",
-			});
+			res.status(200).json({ message: "SUCCESS UPDATE USER" });
 		} catch (error) {
 			console.log(error);
-			res.status(400).json({ message: "INVALID UPDATE USER PROFILE" });
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.message === "ERROR USER NOT FOUND") {
+				status = 404;
+				message = "USER NOT FOUND";
+			}
+
+			res.status(status).json(message);
 		}
 	}
 
-	static async deleteUser(req, res, next) {
+	static async deleteUser(req, res) {
 		try {
-			// res.send("Masuk");
+			// res.send("Masuk Controller");
 			// console.log(req.params);
 
 			const { id } = req.params;
-			// console.log(id, "<<< ID DARI REQ PARAMSS");
+			const findUserById = await User.findByPk(id);
+			if (!findUserById) throw new Error("ERROR USER NOT FOUND");
 
-			const findUser = await User.findByPk(id);
-
-			if (!findUser) throw new Error("USER NOT FOUND");
-			await User.destroy({ where: { id: findUser.id } });
-
-			res.status(200).json({ message: "DELETE SUCCESSFULL" });
+			await User.destroy({ where: { id } });
+			res.status(200).json({ message: "SUCCESS DELETED USER" });
 		} catch (error) {
 			console.log(error);
-			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.message === "ERROR USER NOT FOUND") {
+				status = 400;
+				message = "ERROR USER NOT FOUND";
+			}
+
+			res.status(status).json(message);
 		}
 	}
 
@@ -185,39 +195,83 @@ class Controller {
 
 	static async waifuTag(req, res, next) {
 		try {
-			// console.log("masuk");
 			const fetchWaifuByTag = await axios.get("https://api.waifu.im/tags");
-			// console.log(fetchWaifu);
 			res.status(200).json(fetchWaifuByTag.data);
 		} catch (error) {
 			console.log(error);
+			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
 		}
 	}
 
 	static async waifuData(req, res, next) {
 		try {
 			const fetchWaifu = await axios.get("https://api.waifu.im/search?is_nsfw=false&many=true");
-			// console.log(fetchWaifu);
+
 			res.status(200).json(fetchWaifu.data);
 		} catch (error) {
 			console.log(error);
+			res.status(500).json({ message: "INTERNAL SERVER ERROR" });
 		}
 	}
 
-	static async addNewArts(req, res, next) {
+	static async addArts(req, res) {
 		try {
-			const newArt = await Post.create({
-				title: req.body.title,
-				imgUrl: req.body.imgUrl,
+			const { title, imgUrl, description } = req.body;
+			const newArts = await Post.create({
+				title,
+				imgUrl,
+				description,
+				AuthorId: req.loginInfo.AuthorId,
 			});
-			// console.log(newArt);
 
-			res.status(201).json({
-				message: "NEW ARTS HAS BEEN ADDED",
-				newArt,
-			});
+			res.status(201).json({ message: "POST CREATED", newArts });
 		} catch (error) {
-			console.log(error);
+			console.log(error.errors[0].message);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.errors[0].message === "Title cannot be empty") {
+				status = 400;
+				message = "PLEASE ENTER POST TITLE";
+			} else if (error.errors[0].message === "ImageURL cannot be empty") {
+				status = 400;
+				message = "PLEASE ENTER POST IMAGE LINK";
+			}
+
+			res.status(status).json(message);
+		}
+	}
+
+	static async updateArts(req, res) {
+		try {
+			const { id } = req.params;
+			const findPost = await Post.findByPk(id);
+			if (!findPost) throw new Error("POST ID NOT FOUND");
+
+			const { title, imgUrl, description } = req.body;
+			await Post.update(
+				{
+					title,
+					imgUrl,
+					description,
+				},
+				{
+					where: { id: findPost.id },
+				}
+			);
+
+			res.status(200).json({ message: "POST HAS BEEN UPDATED" });
+		} catch (error) {
+			console.log(error.message);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			if (error.message === "POST ID NOT FOUND") {
+				status = 404;
+				message = "POST ID NOT FOUND";
+			}
+			res.status(status).json(message);
 		}
 	}
 
@@ -231,17 +285,31 @@ class Controller {
 		}
 	}
 
-	static async deleteArts(req, res, next) {
+	static async deleteArts(req, res) {
 		try {
+			const { id } = req.params;
+			const findPost = await Post.findByPk(id);
+			if (!findPost) throw new Error("POST ID NOT FOUND");
+
 			await Post.destroy({
 				where: {
-					id: req.params.id,
+					id,
 				},
 			});
 
-			res.status(200).json({ message: "ART DELETED" });
+			res.status(200).json({ message: "POST HAS BEEN DELETED" });
 		} catch (error) {
 			console.log(error);
+			let status = 500;
+			let message = "INTERNAL SERVER ERROR";
+
+			// ?ERRORHANDLING
+			if (error.message === "POST ID NOT FOUND") {
+				status = 404;
+				message = "POST ID NOT FOUND / HAS BEEN DELETED";
+			}
+
+			res.status(status).json(message);
 		}
 	}
 }
