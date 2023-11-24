@@ -233,6 +233,8 @@ describe("DELETE /:id", () => {
 	});
 });
 
+describe("")
+
 //? DELETE DATA
 afterAll(async () => {
 	await sequelize.queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true });
