@@ -87,6 +87,80 @@ describe("POST /login", () => {
 	});
 });
 
+describe("POST /register", () => {
+	describe("POST /register - success", () => {
+		it("Should be return an object with message", async () => {
+			const body = { userName: "angelineeaisyah", email: "auliaaisyah@mail.com", password: "123456" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(201);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+
+	describe("POST /register - error", () => {
+		it("Should be return an object with message", async () => {
+			const body = { userName: "", email: "auliaaisyah@mail.com", password: "123456" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(400);
+		});
+
+		it("Should be return an object with message", async () => {
+			const body = { userName: "angelineeaisyah", email: "", password: "123456" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(400);
+		});
+
+		it("Should be return an object with message", async () => {
+			const body = { userName: "angelineeaisyah", email: "auliaaisyah@mail.com", password: "" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(400);
+		});
+
+		it("Should be return an object with message", async () => {
+			const body = { userName: "", email: "", password: "" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(400);
+		});
+
+		it("Should be return an object with message", async () => {
+			const body = { userName: "angelineeaisyah", email: "auliaaisyah", password: "123456" };
+			const response = await request(app).post("/register").send(body);
+
+			expect(response.status).toBe(400);
+		});
+	});
+});
+
+describe("PUT /:id", () => {
+	describe("PUT /:id - success", () => {
+		it("Should be return an object with message", async () => {
+			const body = { userName: "njelin", email: "njelin@mail.com" };
+			const response = await request(app).put("/1").set("Authorization", `Bearer ${access_token}`).send(body);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+
+	describe("PUT /:id - error", () => {
+		it.only("Should be return an object with message", async () => {
+			const body = { userName: "njelin", email: "" };
+			const response = await request(app).put("/1").set("Authorization", `Bearer ${access_token}`).send(body);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+});
+
 //? DELETE DATA
 afterAll(async () => {
 	await sequelize.queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true });

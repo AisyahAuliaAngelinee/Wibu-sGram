@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700797505351" clover="3.2.0">
-  <project timestamp="1700797505351" name="All files">
-    <metrics statements="245" coveredstatements="100" conditionals="62" coveredconditionals="14" methods="24" coveredmethods="11" elements="331" coveredelements="125" complexity="0" loc="245" ncloc="245" packages="6" files="9" classes="9"/>
+<coverage generated="1700800285966" clover="3.2.0">
+  <project timestamp="1700800285966" name="All files">
+    <metrics statements="245" coveredstatements="102" conditionals="62" coveredconditionals="13" methods="24" coveredmethods="12" elements="331" coveredelements="127" complexity="0" loc="245" ncloc="245" packages="6" files="9" classes="9"/>
     <package name="server">
       <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/vincentiusclarishna/Documents/PROJECT WEBSITE/06. Wibu'sGram/Wibu-sGram/server/app.js">
@@ -20,9 +20,9 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="148" coveredstatements="24" conditionals="42" coveredconditionals="5" methods="11" coveredmethods="1"/>
+      <metrics statements="148" coveredstatements="17" conditionals="42" coveredconditionals="2" methods="11" coveredmethods="1"/>
       <file name="controller.js" path="/Users/vincentiusclarishna/Documents/PROJECT WEBSITE/06. Wibu'sGram/Wibu-sGram/server/controllers/controller.js">
-        <metrics statements="148" coveredstatements="24" conditionals="42" coveredconditionals="5" methods="11" coveredmethods="1"/>
+        <metrics statements="148" coveredstatements="17" conditionals="42" coveredconditionals="2" methods="11" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -60,38 +60,38 @@
         <line num="53" count="0" type="stmt"/>
         <line num="54" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="62" count="6" type="stmt"/>
-        <line num="63" count="6" type="stmt"/>
-        <line num="64" count="6" type="stmt"/>
-        <line num="69" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="70" count="3" type="stmt"/>
-        <line num="73" count="3" type="stmt"/>
-        <line num="74" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="75" count="2" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="87" count="5" type="stmt"/>
-        <line num="88" count="5" type="stmt"/>
-        <line num="89" count="5" type="stmt"/>
-        <line num="92" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="93" count="5" type="stmt"/>
-        <line num="94" count="5" type="stmt"/>
-        <line num="97" count="5" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="108" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="105" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="123" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="120" count="1" type="stmt"/>
+        <line num="123" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="124" count="0" type="stmt"/>
         <line num="125" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
+        <line num="128" count="1" type="stmt"/>
         <line num="133" count="0" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
         <line num="138" count="0" type="stmt"/>
@@ -176,44 +176,44 @@
     <package name="server.helpers">
       <metrics statements="14" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
       <file name="bcrypt.js" path="/Users/vincentiusclarishna/Documents/PROJECT WEBSITE/06. Wibu'sGram/Wibu-sGram/server/helpers/bcrypt.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
       <file name="jwt.js" path="/Users/vincentiusclarishna/Documents/PROJECT WEBSITE/06. Wibu'sGram/Wibu-sGram/server/helpers/jwt.js">
-        <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
     </package>
     <package name="server.middleware">
-      <metrics statements="22" coveredstatements="4" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="22" coveredstatements="13" conditionals="6" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <file name="authentication.js" path="/Users/vincentiusclarishna/Documents/PROJECT WEBSITE/06. Wibu'sGram/Wibu-sGram/server/middleware/authentication.js">
-        <metrics statements="22" coveredstatements="4" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="22" coveredstatements="13" conditionals="6" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>

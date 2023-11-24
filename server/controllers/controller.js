@@ -115,7 +115,7 @@ class Controller {
 
 			res.status(200).json({ message: "SUCCESS UPDATE USER" });
 		} catch (error) {
-			console.log(error);
+			console.log(error.message);
 			let status = 500;
 			let message = "INTERNAL SERVER ERROR";
 
