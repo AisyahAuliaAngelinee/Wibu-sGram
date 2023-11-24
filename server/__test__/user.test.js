@@ -18,20 +18,20 @@ beforeAll(async () => {
 
 		const userLogin = {
 			id: 1,
-			userName: "aisyahangelinee",
+			email: "aisyahaulia@mail.com",
 		};
 
 		access_token = signToken(userLogin);
 	} catch (error) {
-		console.log(error);
+		console.log(error, "ERROR");
 	}
 });
 
 // !USER TESTING
-DESCRIBE("POST /login", () => {
-	DESCRIBE("POST /login - success", () => {
-		it.only("Should be return of array of object instance data user", async () => {
-			const body = { username: "aisyahangelinee", password: "123456" };
+describe("POST /login", () => {
+	describe("POST /login - success", () => {
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "aisyahaulia@mail.com", password: "123456" };
 			const response = await request(app).post("/login").send(body);
 
 			expect(response.status).toBe(200);
@@ -41,4 +41,53 @@ DESCRIBE("POST /login", () => {
 			console.log(response.body);
 		});
 	});
+});
+
+describe("POST /login", () => {
+	describe("POST /login - error", () => {
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "", password: "123456" };
+			const response = await request(app).post("/login").send(body);
+
+			expect(response.status).toBe(400);
+			console.log(response.body);
+		});
+
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "aisyahaulia@mail.com", password: "" };
+			const response = await request(app).post("/login").send(body);
+
+			expect(response.status).toBe(400);
+			console.log(response.body);
+		});
+
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "", password: "" };
+			const response = await request(app).post("/login").send(body);
+
+			expect(response.status).toBe(400);
+			console.log(response.body);
+		});
+
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "aisyahaulia", password: "123456" };
+			const response = await request(app).post("/login").send(body);
+
+			expect(response.status).toBe(400);
+			console.log(response.body);
+		});
+
+		it("Should be return of array of object instance data user", async () => {
+			const body = { email: "aisyahaulia@mail.com", password: "123" };
+			const response = await request(app).post("/login").send(body);
+
+			expect(response.status).toBe(400);
+			console.log(response.body);
+		});
+	});
+});
+
+//? DELETE DATA
+afterAll(async () => {
+	await sequelize.queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true });
 });

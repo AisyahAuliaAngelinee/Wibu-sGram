@@ -3,7 +3,6 @@ const { User, Post } = require("../models");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const axios = require("axios");
-const e = require("express");
 
 class Controller {
 	static async register(req, res) {
