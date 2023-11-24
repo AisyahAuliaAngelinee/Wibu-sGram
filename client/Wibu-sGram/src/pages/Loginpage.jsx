@@ -21,7 +21,7 @@ const Login = () => {
 	const submitLogin = async (event) => {
 		event.preventDefault();
 		try {
-			const response = await axios.post("http://localhost:3000/login", {
+			const response = await axios.post("https://vclrshna.online/login", {
 				email,
 				password,
 			});
@@ -30,7 +30,7 @@ const Login = () => {
 			localStorage.setItem("token", response.data.access_token);
 			localStorage.setItem("id", response.data.id);
 
-			navigate("/home");
+			navigate("/profil.:id");
 		} catch (error) {
 			console.log(error.message);
 		}

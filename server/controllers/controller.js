@@ -205,6 +205,7 @@ class Controller {
 	static async waifuData(req, res, next) {
 		try {
 			const fetchWaifu = await axios.get("https://api.waifu.im/search?is_nsfw=false&many=true");
+
 			res.status(200).json(fetchWaifu.data);
 		} catch (error) {
 			console.log(error);

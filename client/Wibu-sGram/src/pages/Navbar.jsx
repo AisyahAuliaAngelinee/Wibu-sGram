@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
 	const id = localStorage.getItem("id");
 
+	async function logoutHandler() {
+		try {
+			localStorage.removeItem("token");
+			localStorage.removeItem("access_token");
+			localStorage.removeItem("id");
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	return (
 		<>
 			<header>
@@ -19,12 +29,15 @@ const Navbar = () => {
 						</li>
 						<li>
 							<Link to={"/"}>Utama</Link>
+
 						</li>
 						<li>
-							<Link to={"/myarts"}>MyArts</Link>
+							<Link to={`/login`}>Profil</Link>
 						</li>
 						<li>
-							<Link to={`/profile/${id}`}>Profil</Link>
+							<Link to={"/"} onClick={logoutHandler}>
+								Logout
+							</Link>
 						</li>
 					</ul>
 				</nav>
