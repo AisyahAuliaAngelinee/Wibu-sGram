@@ -17,7 +17,7 @@ const Navbar = () => {
 		<>
 			<header>
 				<Link to={"#"} className="logo">
-					<img src="/public/wibusgram.svg" alt="" />
+					<img src="/public/wibusgram-high-resolution-logo-transparent.png" alt="" />
 				</Link>
 				<div className="icons">
 					<i className="fas fa-bars" id="menu-bars"></i>
@@ -25,10 +25,11 @@ const Navbar = () => {
 				<nav className="navbar">
 					<ul>
 						<li>
-							<Link to={"/"}>Utama</Link>
+							<Link to={"/login"}>Pulang</Link>
 						</li>
 						<li>
-							<Link to={"/myarts"}>MyArts</Link>
+							<Link to={"/"}>Utama</Link>
+
 						</li>
 						<li>
 							<Link to={`/login`}>Profil</Link>
