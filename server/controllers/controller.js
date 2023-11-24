@@ -275,16 +275,6 @@ class Controller {
 		}
 	}
 
-	static async showArts(req, res, next) {
-		try {
-			const dataArts = await Post.findAll();
-			// console.log(dataArts, "<<<<<");
-			res.status(200).json(dataArts);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
 	static async deleteArts(req, res) {
 		try {
 			const { id } = req.params;
@@ -310,6 +300,16 @@ class Controller {
 			}
 
 			res.status(status).json(message);
+		}
+	}
+
+	static async showArts(req, res, next) {
+		try {
+			const dataArts = await Post.findAll();
+			// console.log(dataArts, "<<<<<");
+			res.status(200).json(dataArts);
+		} catch (error) {
+			console.log(error);
 		}
 	}
 }
