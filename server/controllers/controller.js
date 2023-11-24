@@ -115,7 +115,7 @@ class Controller {
 
 			res.status(200).json({ message: "SUCCESS UPDATE USER" });
 		} catch (error) {
-			console.log(error.message);
+			console.log(error);
 			let status = 500;
 			let message = "INTERNAL SERVER ERROR";
 
@@ -147,7 +147,7 @@ class Controller {
 
 			// ?ERRORHANDLING
 			if (error.message === "ERROR USER NOT FOUND") {
-				status = 400;
+				status = 404;
 				message = "ERROR USER NOT FOUND";
 			}
 
